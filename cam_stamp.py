@@ -2,6 +2,7 @@
 import time
 import datetime
 import logging
+import os
 
 
 class CamTimestamp:
@@ -13,8 +14,8 @@ class CamTimestamp:
 	'''
 	
 	# set filename for storing last call time to default
-	# TODO include path
-	stamp_file = 'stamp_default.txt'
+	# TODO check if env found 
+	stamp_file = os.getenv('TIMESTAMP_CAM')
 	# set minimum time gap between 2 mails to default, units are seconds
 	# TODO before going productive set this value e.g. to 1800, otherwise you risk tsunami
 	min_gap = 15
@@ -36,13 +37,10 @@ class CamTimestamp:
 		returns False if there was an email sent in this period - send no email
 		'''
 		last_time = self._get_timestamp()
-		print('time stamp:',last_time)
 		# get current time
 		current_time =time.time()
-		print('current time:', current_time)
 		# time difference in seconds
 		time_diff = current_time - last_time
-		print('time difference',time_diff)
 		# 
 		# if time difference bigger than minimimum
 		if time_diff > self.min_gap: 
@@ -50,7 +48,6 @@ class CamTimestamp:
 			# in first try no attention to return values
 			self._set_timestamp(current_time)
 			logging.info('shouldSend: time_diff exceeds limit, new timestamp was set')
-			print('set new time stamp')
 			return True
 		else:
 			# no new email necessary, no new timestamp
@@ -64,13 +61,13 @@ class CamTimestamp:
 		returns time in minutes elapsed from last time a email was sent
 		returns 0, if file cannot be read
 		'''
+		# TODO rebuild with <with>
 		try:
 			# filename: see class attribute
 			fp = open(self.stamp_file,'r')
 			gap = float(fp.read())
 			fp.close()
 		except OSError:
-			print('get: cannot open file')
 			logging.warning('get_timestamp: cannot open file')
 			# give back 0, so the mail is sent in any case
 			# that could raise problems - imagine hard disk full or access problems
@@ -78,12 +75,11 @@ class CamTimestamp:
 			gap = 0
 			return gap
 		except:
-			print('get: unexpected error')
 			logging.warning('get_timestamp: unexpected error')
 			# give back 0, so the mail is sent in any case
 			# keep in mind comment above OSerror section
 			gap = 0
-			fp.close()
+			# fp.close()
 			return gap
 		return gap
 	
@@ -102,12 +98,10 @@ class CamTimestamp:
 			fp.close()
 			return True
 		except OSError:
-			print('set: cannot open file')
 			logging.warning('set_timestamp: cannot open file')
 			# 
 			return False
 		except:
-			print('set: unexpected error')
 			logging.warning('set_timestamp: cannot open file')
 			# no fp.close(), could lead to problems
 			return False

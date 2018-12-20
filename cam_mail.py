@@ -9,6 +9,7 @@ from email.message import EmailMessage
 # imghdr to find the types of our images
 import imghdr
 from cam_pictures import find_newpics
+import logging
 
 
 class SendMail(object):
@@ -38,6 +39,8 @@ class SendMail(object):
         # prepare email
         msg = self.prepareEmail(to, From)
         failed = server.sendmail(From, to, msg.as_string())
+        if failed == True:
+            logging.info("send: Error sending E-Mail")
         server.quit()
 
     def prepareEmail(self, to, From):
@@ -58,10 +61,10 @@ class SendMail(object):
         msg['Subject'] = 'Bewegung von Kamera 1 entdeckt'
         # message body
         msg.set_content('motion: alert detected')
-        print(msg.as_string())
         # get last 3 pictures from cam
         # first: get directory
-        pic_dir = os.getenv("DIR_BILDER")
+        # TODO extract from here and make class attribute
+        pic_dir = os.getenv("PICTURE_DIR")
         # findNew... give only filenames, but module give a chdir, so that file
         # automatically is looked for in the correct directory
         lastpictures = find_newpics(pic_dir, 3, ".jpg")
