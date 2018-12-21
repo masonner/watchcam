@@ -1,6 +1,6 @@
 # program is called after motion detection
 # call is part of motion.conf either on_event_start or
-# on_event_end
+# on_event_end x
 
 import os
 import time
