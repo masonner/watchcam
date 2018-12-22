@@ -1,4 +1,4 @@
-# program is called after motion detection
+# program is called after motion detection from motion
 # call is part of motion.conf either on_event_start or
 # on_event_end x
 
@@ -7,13 +7,13 @@ import time
 import logging
 from cam_stamp import CamTimestamp
 from cam_mail import SendMail
+import cam_constants
 
-logfile= os.getenv("LOG_FILE")
 # configuration error logger
 # TODO later set limitatation to x MB, use logging.handlers.RotatingFileHandler
 logging.basicConfig(format='%(asctime)s %(message)s', \
 datefmt='%d/%m/%Y %I:%M:%S %p', \
-filename=logfile, \
+filename=cam_constants.LOG_FILE, \
 level=logging.DEBUG)
 
 # log
