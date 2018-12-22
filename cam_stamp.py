@@ -3,19 +3,16 @@ import time
 import datetime
 import logging
 import os
+import cam_constants
 
 
 class CamTimestamp:
 	'''
 	handles minimum time between 2 mails in order to prevent to many mails sent
-	environment variables are needed to be set 
-	TIMESTAMP_CAM: filename for last timestamp, a default value is ser
 	NEWMAIL_GAP: mimimum times in seconds between 2 mails, a default value is set
 	'''
 	
-	# set filename for storing last call time to default
-	# TODO check if env found 
-	stamp_file = os.getenv('TIMESTAMP_CAM')
+
 	# set minimum time gap between 2 mails to default, units are seconds
 	# TODO before going productive set this value e.g. to 1800, otherwise you risk tsunami
 	min_gap = 15
@@ -63,8 +60,8 @@ class CamTimestamp:
 		'''
 		# TODO rebuild with <with>
 		try:
-			# filename: see class attribute
-			fp = open(self.stamp_file,'r')
+			# open and read last timestamp
+			fp = open(cam_constants.TIMESTAMP_CAM,'r')
 			gap = float(fp.read())
 			fp.close()
 		except OSError:
@@ -92,8 +89,8 @@ class CamTimestamp:
 		returns False if there were writing errors
 		'''
 		try:
-			# filename: see class attribute
-			fp = open(self.stamp_file,'w')
+			# open or create, if file not exists
+			fp = open(cam_constants.TIMESTAMP_CAM,'w+')
 			fp.write(str(new_time))
 			fp.close()
 			return True
@@ -112,7 +109,7 @@ if __name__ == "__main__":
 	# TODO later set limitatation to x MB, use logging.handlers.RotatingFileHandler
 	logging.basicConfig(format='%(asctime)s %(message)s', \
 	datefmt='%d/%m/%Y %I:%M:%S %p', \
-	filename='soncam.log', \
+	filename=cam_constants.LOG_FILE, \
 	level=logging.DEBUG)
 
 	timestamp = CamTimestamp()	
