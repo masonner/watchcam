@@ -14,10 +14,8 @@ import cam_constants
 
 
 class SendMail(object):
-    # attention on mac: there could be problems with getenv when starting program
-    # from idle, start from bash shell - use idle3.7 or python3.7 ---path is set
-    # own email-address
-    mailadress = os.getenv('MAIL_ADDRESS') 
+    # email-address receiver
+    mailadress = cam_constants.MAIL_ADDRESS
     # MS-Server
     smtpserver = 'smtp.live.com'
     # own email-address
@@ -29,7 +27,7 @@ class SendMail(object):
         send email to hotmail server
         parameter: no parameter
         """
-        to = self.mailadress
+        to = cam_constants.MAIL_ADDRESS
         From = self.mailadress
         # Connect to server and send mail to hotmail
         server = smtplib.SMTP(self.smtpserver)
