@@ -10,6 +10,7 @@ from email.message import EmailMessage
 import imghdr
 from cam_pictures import find_newpics
 import logging
+import cam_constants
 
 
 class SendMail(object):
@@ -20,8 +21,8 @@ class SendMail(object):
     # MS-Server
     smtpserver = 'smtp.live.com'
     # own email-address
-    username = os.getenv('MAIL_ADDRESS')   
-    password = os.getenv('MAIL_PW')
+    username = cam_constants.MAIL_ADDRESS   
+    password = cam_constants.MAIL_PW
 
     def send(self):
         """
@@ -64,7 +65,7 @@ class SendMail(object):
         # get last 3 pictures from cam
         # first: get directory
         # TODO extract from here and make class attribute
-        pic_dir = os.getenv("PICTURE_DIR")
+        pic_dir = cam_constants.PICTURE_DIR
         # findNew... give only filenames, but module give a chdir, so that file
         # automatically is looked for in the correct directory
         lastpictures = find_newpics(pic_dir, 3, ".jpg")
