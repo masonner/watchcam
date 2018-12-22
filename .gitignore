@@ -1,4 +1,7 @@
 # ignogre log-file and timestamp
 *.log
 *.txt
-
+# ignore constants - because of private data
+cam_constants.py
+# ignore __pycache
+__*
