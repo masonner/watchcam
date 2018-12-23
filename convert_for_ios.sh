@@ -20,5 +20,6 @@ cd $BUFFER_DIR
 for file in *.avi; do
 	ffmpeg -y -i "$file" $NAS_DIR"$file.m4v"
 done
-
-# later: log everything
+# TODO rm all *._* buffer files in NAS_DIR
+# remove all this ugly .avi.m4k double extension
+# TODO log everything
