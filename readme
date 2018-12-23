@@ -1,0 +1,36 @@
+watchcam program for raspi + raspi-cam based on open source "motion"
+
+Function:
+sends E-mail with picture if motion detects motion
+converts .avi (from motion) to .m4v (IOS) and transfer .m4v to NAS
+logs everything
+
+Parts:
+cam_main_detected.py - main, called from motion (motion.conf) if motion detected
+cam_pictures.py - get last pictures
+cam_mail.py - creates mail and attaches last pictures
+cam_stamp.py  - set timestamp, to prevent an E-mail tsunami
+cam_constant.py  - all necessary constants like directories, E-MAIL-address...
+convert_for_ios.sh - convert motion-.avi in .m4v incl. transfer to NAS
+
+motion:
+after changing motion.conf -> sudo service motion stop / start
+have a look at /tmp/motion.log if problems - part of start procedure in motion.conf
+
+Environment Variable: Not used
+
+directories:
+/home/pi/Projekte/repositories/watchcam: all sources
+/home/pi/Bilder/cam: place where motion puts all its .jpg and .avi
+/home/pi/Bilder/cam/buffer: transfer place for .avi before converting
+/home/pi/fritz_speicher: NAS, mounted
+
+conditions:
+CRON: t.b.d.
+NAS is mounted (sudo mount -a)
+service motion is started (standard, but check)
+motion must have "w"-rights on Project directories
+
+logs:
+/home/pi/Projects/repositories/watchcam/soncam.log - Python log
+/tmp/motion.log - stdout from cam_main_detetected, redirected in motion.conf
