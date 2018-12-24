@@ -16,10 +16,10 @@ done
 
 # convert all .avi in ios readable format, -y should force overwriting
 # and put them on the NAS
+# strip the ugly .avi extension from filename before
 cd $BUFFER_DIR
 for file in *.avi; do
-	ffmpeg -y -i "$file" $NAS_DIR"$file.m4v"
+	ffmpeg -y -i "$file" $NAS_DIR"${file%%.avi}.m4v"
 done
 # TODO rm all *._* buffer files in NAS_DIR
-# remove all this ugly .avi.m4k double extension
 # TODO log everything
