@@ -11,7 +11,9 @@ cam_pictures.py - get last pictures
 cam_mail.py - creates mail and attaches last pictures
 cam_stamp.py  - set timestamp, to prevent an E-mail tsunami
 cam_constant.py  - all necessary constants like directories, E-MAIL-address...
-convert_for_ios.sh - convert motion-.avi in .m4v incl. transfer to NAS
+cam_for_ios.sh - convert motion-.avi in .m4v incl. transfer to NAS, every 5 min - via cron
+cam_delete_old_files.sh - delete motion files older than 1 days - via cron
+
 
 motion:
 after changing motion.conf -> sudo service motion stop / start
@@ -26,11 +28,13 @@ directories:
 /home/pi/fritz_speicher: NAS, mounted
 
 conditions:
-CRON: t.b.d.
+CRON: local crontab table is filled - crontab -e (no user!)
 NAS is mounted (sudo mount -a)
 service motion is started (standard, but check)
 motion must have "w"-rights on Project directories
+shell scripts are included in crontab
 
 logs:
 /home/pi/Projects/repositories/watchcam/soncam.log - Python log
 /tmp/motion.log - stdout from cam_main_detetected, redirected in motion.conf
+/tmp/cronlog(1).log -stdout from cronjob
