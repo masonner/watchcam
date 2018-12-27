@@ -2,7 +2,7 @@ watchcam program for raspi + raspi-cam based on open source "motion"
 
 Function:
 sends E-mail with picture if motion detects motion
-converts .avi (from motion) to .m4v (IOS) and transfer .m4v to NAS
+copy .mp4 to NAS
 logs everything
 
 Parts:
