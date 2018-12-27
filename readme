@@ -29,7 +29,7 @@ directories:
 
 conditions:
 CRON: local crontab table is filled - crontab -e (no user!)
-NAS is mounted (sudo mount -a)
+NAS is mounted (/etc/rc.local sudo mount -a)
 service motion is started (standard, but check)
 motion must have "w"-rights on Project directories
 shell scripts are included in crontab
