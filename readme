@@ -29,7 +29,9 @@ directories:
 
 conditions:
 CRON: local crontab table is filled - crontab -e (no user!)
-NAS is mounted (/etc/rc.local sudo mount -a)
+NAS is mounted 
+fill fstab mit data for Fritzbox
+/etc/rc.local: mount -a because fstab does no automount, give 10 sec wait before
 service motion is started (standard, but check)
 motion must have "w"-rights on Project directories
 shell scripts are included in crontab
@@ -38,3 +40,4 @@ logs:
 /home/pi/Projects/repositories/watchcam/soncam.log - Python log
 /tmp/motion.log - stdout from cam_main_detetected, redirected in motion.conf
 /tmp/cronlog(1).log -stdout from cronjob
+/tmp: rc.log - only a short info from rc.local
