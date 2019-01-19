@@ -13,13 +13,11 @@ class CamTimestamp:
 	'''
 	
 
-	# set minimum time gap between 2 mails to default, units are seconds
-	# TODO before going productive set this value e.g. to 1800, otherwise you risk tsunami
-	min_gap = 15
+	# set minimum time gap between 2 mails, units are seconds
+	min_gap = cam_constants.NEWMAIL_GAP
 	
 	def __init__(self):
-		# TODO read here env variable TIMESTAMP_CAM and NEWMAIL_GAP in class attributes,
-		# if no successful keep on using default
+                # nothing to do here
 		pass
 	
 	def shouldSend(self):

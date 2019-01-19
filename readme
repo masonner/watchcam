@@ -1,0 +1,43 @@
+watchcam program for raspi + raspi-cam based on open source "motion"
+
+Function:
+sends E-mail with picture if motion detects motion
+copy .mp4 to NAS
+logs everything
+
+Parts:
+cam_main_detected.py - main, called from motion (motion.conf) if motion detected
+cam_pictures.py - get last pictures
+cam_mail.py - creates mail and attaches last pictures
+cam_stamp.py  - set timestamp, to prevent an E-mail tsunami
+cam_constant.py  - all necessary constants like directories, E-MAIL-address...
+cam_for_ios.sh - convert motion-.avi in .m4v incl. transfer to NAS, every 5 min - via cron
+cam_delete_old_files.sh - delete motion files older than 1 days - via cron
+
+
+motion:
+after changing motion.conf -> sudo service motion stop / start
+have a look at /tmp/motion.log if problems - part of start procedure in motion.conf
+
+Environment Variable: Not used
+
+directories:
+/home/pi/Projekte/repositories/watchcam: all sources
+/home/pi/Bilder/cam: place where motion puts all its .jpg and .avi
+/home/pi/Bilder/cam/buffer: transfer place for .avi before converting
+/home/pi/fritz_speicher: NAS, mounted
+
+conditions:
+CRON: local crontab table is filled - crontab -e (no user!)
+NAS is mounted 
+fill fstab mit data for Fritzbox
+/etc/rc.local: mount -a because fstab does no automount, give 10 sec wait before
+service motion is started (standard, but check)
+motion must have "w"-rights on Project directories
+shell scripts are included in crontab
+
+logs:
+/home/pi/Projects/repositories/watchcam/soncam.log - Python log
+/tmp/motion.log - stdout from cam_main_detetected, redirected in motion.conf
+/tmp/cronlog(1).log -stdout from cronjob
+/tmp: rc.log - only a short info from rc.local

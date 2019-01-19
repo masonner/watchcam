@@ -19,7 +19,8 @@ level=logging.DEBUG)
 # log
 logging.info("main_detected: motion detected")
 # sleep and wait a moment, motion needs time to store the pictures
-time.sleep(2)
+# -- seems not to be needed
+# time.sleep(2)
 # check if there was already a mail sent - prevent an email tsunami
 ok_send = CamTimestamp()
 ok_mail = SendMail()
