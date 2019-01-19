@@ -16,8 +16,8 @@ import cam_constants
 class SendMail(object):
     # email-address receiver
     mailadress = cam_constants.MAIL_ADDRESS
-    # MS-Server
-    smtpserver = 'smtp.live.com'
+    # mail-Server
+    smtpserver = cam_constants.SMTPSERVER
     # own email-address
     username = cam_constants.MAIL_ADDRESS   
     password = cam_constants.MAIL_PW
