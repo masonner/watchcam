@@ -37,8 +37,12 @@ class SendMail(object):
         server.login(self.username, self.password)
         # prepare email
         msg = self.prepareEmail(to, From)
+        # raise an exception if technical problems, returns a dictionary with
+        # entries of refused recipients
         failed = server.sendmail(From, to, msg.as_string())
+        print(failed)
         if failed == True:
+            # ?? that is bullshit - exception handling and return code  
             logging.info("send: Error sending E-Mail")
         server.quit()
 
