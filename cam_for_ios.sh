@@ -15,7 +15,7 @@ NAS_DIR=/home/pi/fritz_speicher/
 cd $IMAGE_DIR
 for file in *.mp4; do
 	sudo chown pi "$file"; 
-	cp  "$file" $NAS_DIR
+	cp -p  "$file" $NAS_DIR
 done 
 
 # convert all .avi in ios readable format, -y should force overwriting

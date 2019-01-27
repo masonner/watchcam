@@ -24,7 +24,7 @@ Environment Variable: Not used
 directories:
 /home/pi/Projekte/repositories/watchcam: all sources
 /home/pi/Bilder/cam: place where motion puts all its .jpg and .avi
-/home/pi/Bilder/cam/buffer: transfer place for .avi before converting
+--not used: /home/pi/Bilder/cam/buffer: transfer place for .avi before converting
 /home/pi/fritz_speicher: NAS, mounted
 
 conditions:
@@ -41,3 +41,4 @@ logs:
 /tmp/motion.log - stdout from cam_main_detetected, redirected in motion.conf
 /tmp/cronlog(1).log -stdout from cronjob
 /tmp: rc.log - only a short info from rc.local
+/home/pi/Projects/rep../watchcam/cam_stamp.txt - store for last time stamp
