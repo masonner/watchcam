@@ -1,4 +1,5 @@
 watchcam program for raspi + raspi-cam based on open source "motion"
+only a small extension for github - can be deleted 
 
 Function:
 sends E-mail with picture if motion detects motion
